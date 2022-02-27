@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 
 class Users extends Model { }
 
@@ -12,13 +12,13 @@ Users.init(
             primaryKey: true,
             autoIncrement: true
         },
-        userName: {
+        username: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true,
             validate: {
                 len: [5, 15],
-                isAlphaNumeric: true,
+                isAlphanumeric: true,
             }
         },
         password: {
@@ -41,8 +41,9 @@ Users.init(
         hooks: {
             beforeCreate(newUserData) {
                 const salt = bcrypt.genSaltSync();
-                newUserData.password = bcrypt.hashSync(newUserData.password, salt);
-            }
+                newUserData.password = bcrypt.hashSync(newUserData.password, 10);
+            },
+
         },
         sequelize,
         timestamps: false,
@@ -50,3 +51,5 @@ Users.init(
         modelName: 'users'
     }
 );
+
+module.exports = Users;
