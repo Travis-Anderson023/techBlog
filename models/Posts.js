@@ -47,4 +47,4 @@ Posts.init(
     }
 );
 
-module.export = Posts;
+module.exports = Posts;
