@@ -48,4 +48,4 @@ Comments.init(
     }
 );
 
-module.export = Comments;
+module.exports = Comments;
