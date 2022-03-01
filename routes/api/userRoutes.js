@@ -44,9 +44,11 @@ router.post('/login', async (req, res) => {
                 username: req.body.username
             }
         });
+
         if (user) {
             const passwordMatch = await bcrypt.compare(req.body.password, user.password);
             if (passwordMatch) {
+                req.session.userId = user.id;
                 res.json({ message: 'success' });
             } else {
                 res.json({ message: 'password fail' });
@@ -58,6 +60,12 @@ router.post('/login', async (req, res) => {
         res.json({ message: err });
         console.log(err);
     }
+});
+
+//logout user
+router.get('/logout', (req, res) => {
+    req.session.destroy();
+    res.json({ message: 'logged out' });
 });
 
 
