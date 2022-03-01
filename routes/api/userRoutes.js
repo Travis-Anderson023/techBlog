@@ -28,28 +28,34 @@ router.post('/', async (req, res) => {
             password: req.body.password,
             email: req.body.email
         });
-        res.json(newUser);
+        res.status(201).send(newUser);
     } catch (err) {
-        res.json({ message: err });
+        res.status(500).send(err);
         console.log(err);
     }
 });
 
 //login user
-//takes username and password1
+//takes username and password
 router.post('/login', async (req, res) => {
     try {
-        const user = await User.findOne({
+        const data = await User.findOne({
             where: {
                 username: req.body.username
             }
         });
-
+        user = data.get({ plain: true });
+        console.log('====================================');
+        console.log(user);
+        console.log('====================================');
         if (user) {
             const passwordMatch = await bcrypt.compare(req.body.password, user.password);
+            console.log('passwordMatch: ', passwordMatch);
             if (passwordMatch) {
-                req.session.userId = user.id;
-                res.json({ message: 'success' });
+                req.session.save(() => {
+                    req.session.userId = user.id;
+                    res.status(201).send('logged in');
+                })
             } else {
                 res.json({ message: 'password fail' });
             }
@@ -57,7 +63,9 @@ router.post('/login', async (req, res) => {
             res.json({ message: 'user not found' });
         }
     } catch (err) {
-        res.json({ message: err });
+        res.status(500).json(err);
+        console.log(req.body);
+        console.log('====================');
         console.log(err);
     }
 });
