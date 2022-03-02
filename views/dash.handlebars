@@ -1,0 +1,18 @@
+<section>
+    <h1 class="ml-3">Dashboard</h1>
+    {{#each postObject}}
+    {{!-- id, title, body, user, comments.id, comments.body, comments.user --}}
+    <div class="col-md-12 mt-3">
+        <div class="card">
+            <div class="card-body">
+                <a class="h5">{{title}}</a>
+                <div class="h7 text-muted">{{user}}</div>
+                <div class="h7">Posted: {{timestamp}}</div>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{body}}</li>
+            </ul>
+        </div>
+    </div>
+    {{/each}}
+</section>
