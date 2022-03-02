@@ -45,9 +45,6 @@ router.post('/login', async (req, res) => {
             }
         });
         user = data.get({ plain: true });
-        console.log('====================================');
-        console.log(user);
-        console.log('====================================');
         if (user) {
             const passwordMatch = await bcrypt.compare(req.body.password, user.password);
             console.log('passwordMatch: ', passwordMatch);
@@ -65,8 +62,6 @@ router.post('/login', async (req, res) => {
     } catch (err) {
         res.status(500).json(err);
         console.log(req.body);
-        console.log('====================');
-        console.log(err);
     }
 });
 
