@@ -1,0 +1,66 @@
+<div class="col-md-12 mt-3">
+    <div class="card">
+        <div class="card-body">
+            <a class="h5" id='userId' data="{{postObject.userId}}"
+                href="/post/{{postObject.id}}">{{postObject.title}}</a>
+            <div class="h7 text-muted">{{postObject.user}}</div>
+            <div class="h7">Posted: {{postObject.timestamp}}</div>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{postObject.body}}</li>
+        </ul>
+    </div>
+
+    {{!-- create comment --}}
+    <div class="card mt-3">
+        <div class="card-body">
+            <form>
+                <div class="form-group">
+                    <label for="comment">Comment</label>
+                    <textarea class="form-control" id="comment-text" name="comment" rows="3"></textarea>
+                </div>
+                <button id='create-comment-button' type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
+        {{#each postObject.comments}}
+        <div class="col-md-12 mt-3">
+            <div class="card">
+                <div class="card-body">
+                    <a class="h5" href="post/{{id}}">{{body}}</a>
+                    <div class="h7 text-muted">{{user}}</div>
+                    <div class="h7">Posted: {{timestamp}}</div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
+<script>
+    const createCommentButton = document.getElementById('create-comment-button');
+    createCommentButton.addEventListener('click', async (event) => {
+        event.preventDefault();
+        const commentBody = document.getElementById('comment-text').value.trim();
+        console.log(commentBody);
+        const postId = window.location.href.split('/').pop();
+        const userId = document.getElementById('userId').getAttribute('data');
+        console.log(`this is user id ${userId}`);
+        const response = await fetch('/api/comments', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                body: commentBody,
+                user_id: userId,
+                post_id: postId
+            })
+        });
+        const comment = await response.json();
+        console.log(comment);
+    });
+
+
+
+
+</script>
