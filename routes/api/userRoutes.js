@@ -47,7 +47,6 @@ router.post('/login', async (req, res) => {
         user = data.get({ plain: true });
         if (user) {
             const passwordMatch = await bcrypt.compare(req.body.password, user.password);
-            console.log('passwordMatch: ', passwordMatch);
             if (passwordMatch) {
                 req.session.save(() => {
                     req.session.userId = user.id;
