@@ -28,12 +28,15 @@ router.post('/', async (req, res) => {
         const newPost = await Post.create({
             title: req.body.title,
             body: req.body.body,
-            user_id: req.body.user_id
+            user_id: req.session.userId
         });
-        res.json(newPost);
+        console.log('====================');
+        res.send(newPost);
     } catch (err) {
-        res.json({ message: err });
+        res.send({ message: err });
+        console.log('====================');
         console.log(err);
+        console.log(req.body)
     }
 });
 

@@ -22,7 +22,6 @@ Posts.init(
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                len: [1, 255]
             },
         },
         user_id: {

@@ -49,7 +49,7 @@ router.get('/', async (req, res) => {
             userId: req.session.userId
         });
     } catch (err) {
-        res.status(500).render('home', {
+        res.status(500).render('login', {
             userId: req.session.userId,
         });
         console.log(err);
