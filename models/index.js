@@ -1,5 +1,5 @@
-const User = require('./users');
-const Post = require('./posts');
+const User = require('./Users');
+const Post = require('./Posts');
 const Comment = require('./comments');
 
 //user has many posts
