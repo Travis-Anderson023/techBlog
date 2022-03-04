@@ -18,5 +18,6 @@ submit.addEventListener('click', async (event) => {
             body: body,
         })
     });
+    window.location.reload();
 });
 

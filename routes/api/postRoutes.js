@@ -48,7 +48,7 @@ router.put('/:id', async (req, res) => {
             {
                 title: req.body.title,
                 body: req.body.body,
-                user_id: req.body.user_id
+                user_id: req.session.userId
             },
             {
                 where: {
@@ -60,6 +60,7 @@ router.put('/:id', async (req, res) => {
     } catch (err) {
         res.json({ message: err });
         console.log(err);
+
     }
 });
 

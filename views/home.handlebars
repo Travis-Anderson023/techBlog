@@ -1,6 +1,17 @@
 <section>
-    <<h1>Home</h1>>
-        <p>
-            This is the home page.
-        </p>
+    <h1>Home</h1>
+    {{#each posts}}
+    <div class="col-md-12 mt-3">
+        <div class="card">
+            <div class="card-body">
+                <a class="h5" href="/post/{{id}}">{{title}}</a>
+                <div class="h7 text-muted">{{user}}</div>
+                <div class="h7">Posted: {{timestamp}}</div>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{body}}</li>
+            </ul>
+        </div>
+    </div>
+    {{/each}}
 </section>

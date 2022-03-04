@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
     try {
         const newComment = await Comment.create({
             body: req.body.body,
-            user_id: req.body.user_id,
+            user_id: req.session.userId,
             post_id: req.body.post_id
         });
         res.json(newComment);
@@ -44,7 +44,7 @@ router.put('/:id', async (req, res) => {
         const updatedComment = await Comment.update(
             {
                 body: req.body.body,
-                user_id: req.body.user_id,
+                user_id: 1,
                 post_id: req.body.post_id
             },
             {
