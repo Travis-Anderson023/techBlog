@@ -46,7 +46,7 @@
             {{#each postObject.comments}}
             <div class="col-md-12 mt-3">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body" id="comment-id" data="{{id}}">
                         <a class="h5" href="post/{{id}}">{{user}}{{userId}}</a>
                         {{#if isCommentOwner}}
                         <div class="float-right">
@@ -59,8 +59,15 @@
                         <div class="h7 text-muted">{{timestamp}}</div>
                         <div class="h7">Posted: {{body}}</div>
                         {{!-- textarea box --}}
-                        <div class="form-group">
-                            <textarea class="form-control" id="edit-comment-text" name="comment" rows="3"></textarea>
+                        <div class="card-body" id="comment-edit-form" style="display: none;">
+                            <form id="editCommentForm" action="/post/{{postObject.id}}" method="POST">
+                                <div class="form-group">
+                                    <label for="body">Body</label>
+                                    <textarea class="form-control" id="comment-edit-body" name="comment-edit-body"
+                                        rows="3"></textarea>
+                                </div>
+                                <button type="submit" id="comment-edit-button" class="btn btn-primary">Submit</button>
+                            </form>
                         </div>
 
                     </div>
@@ -150,6 +157,39 @@
                 method: 'DELETE'
             });
             const comment = await response.json();
+            location.reload();
+        });
+
+        const editCommentToggle = document.getElementById('editComment');
+        const commentEditForm = document.getElementById('comment-edit-form');
+
+        editCommentToggle.addEventListener('click', async (event) => {
+            event.preventDefault();
+            if (commentEditForm.style.display === 'none') {
+                commentEditForm.style.display = 'block';
+            } else {
+                commentEditForm.style.display = 'none';
+            }
+        });
+
+        const commentEditButton = document.getElementById('comment-edit-button');
+
+        commentEditButton.addEventListener('click', async (event) => {
+            event.preventDefault();
+
+            const commentEditBody = document.getElementById('comment-edit-body').value;
+
+
+            const commentId = document.getElementById('comment-id').getAttribute('data');
+            const response = await fetch(`/api/comments/${commentId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    body: commentEditBody,
+                })
+            });
             location.reload();
         });
 
