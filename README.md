@@ -1,4 +1,4 @@
-# My Portfolio
+# Tech Blog
 <img src="https://img.shields.io/badge/License-MIT License-blue">
 
 ## Landing Page
@@ -7,7 +7,7 @@ This is a techblog which allows you to talk with other tech enthusiasts. It is s
 
 ## Link
 
-Make sure to click [here](https://techblog1234524.herokuapp.com/) to view a live copy of the portfolio.
+Make sure to click [here](https://techblog1234524.herokuapp.com/) to view a live copy of the website.
 
 ## Screenshot
 ![screenshot](./screenshot.png)
