@@ -12,7 +12,7 @@ Make sure to click [here](https://techblog1234524.herokuapp.com/) to view a live
 ## Screenshot
 ![screenshot](./screenshot.png)
 
-##Questions
+## Questions
 
 You can reach the creator of this project at:
 [Github](http://github.com/Travis-Anderson023)
